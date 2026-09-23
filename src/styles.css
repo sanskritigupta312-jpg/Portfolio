@@ -13,6 +13,9 @@
   --glass-card: rgba(245, 241, 232, 0.08);
   --glass-border: rgba(245, 241, 232, 0.22);
   --glass-hover: rgba(245, 241, 232, 0.16);
+  --font-serif: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-signature: "Dancing Script", cursive;
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   color: var(--white);
   background: var(--red);
@@ -169,12 +172,13 @@ button {
 }
 
 .eyebrow {
-  margin: 0 0 6px;
-  font-size: 13px;
+  margin: 0 0 8px;
+  font-family: var(--font-serif);
+  font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--beige);
 }
 
 .hero h1 {
@@ -305,17 +309,22 @@ button {
 }
 
 .section-head h2 {
-  font-size: clamp(34px, 5.5vw, 64px);
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 60px);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
   margin: 8px 0 16px;
 }
 
 .section-head h2 em {
-  font-family: "Dancing Script", cursive;
-  font-style: normal;
-  font-size: 1.15em;
+  font-family: var(--font-cormorant);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05em;
+  text-transform: none;
+  color: var(--beige);
 }
 
 .section-sub {
@@ -1258,31 +1267,219 @@ button {
 }
 
 /* ==========================================================================
-   Editorial Brutalist Footer (indevelopment.studio inspired)
+   Royal Editorial Touch & Expanded Home Page Components
+   ========================================================================== */
+.royal-sub-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--beige);
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.royal-serif-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4.2vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+}
+
+.royal-serif-heading em {
+  font-family: var(--font-cormorant);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--beige);
+  letter-spacing: 0.01em;
+}
+
+.royal-manifesto-section {
+  padding: 60px clamp(20px, 6vw, 100px);
+  background: linear-gradient(180deg, #0a0101 0%, #080808 100%);
+  border-top: 1px solid rgba(245, 241, 232, 0.2);
+  border-bottom: 1px solid rgba(245, 241, 232, 0.15);
+}
+
+.manifesto-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.manifesto-header {
+  max-width: 860px;
+  margin-bottom: 36px;
+}
+
+.manifesto-paragraph {
+  font-size: clamp(15.5px, 1.3vw, 18px);
+  line-height: 1.7;
+  color: var(--beige-muted);
+  margin-top: 16px;
+  font-weight: 400;
+}
+
+.royal-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(245, 241, 232, 0.2);
+}
+
+.royal-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.royal-stat-item .stat-num {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.royal-stat-item .stat-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--beige);
+  opacity: 0.85;
+}
+
+.royal-works-section,
+.royal-experience-section {
+  padding: 70px clamp(20px, 6vw, 100px);
+  background: #080808;
+  border-top: 1px solid rgba(245, 241, 232, 0.15);
+}
+
+.royal-works-section .project-grid,
+.royal-experience-section .experience-list {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-head-split {
+  max-width: 1200px;
+  margin: 0 auto 36px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(245, 241, 232, 0.2);
+}
+
+.royal-outline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 9999px;
+  border: 1px solid rgba(245, 241, 232, 0.45);
+  background: rgba(245, 241, 232, 0.08);
+  color: var(--beige);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+
+.royal-outline-btn:hover {
+  background: var(--beige);
+  color: var(--black);
+  border-color: var(--beige);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.royal-inquiry-section {
+  padding: 60px clamp(20px, 6vw, 100px) 70px;
+  background: linear-gradient(180deg, #080808 0%, #000000 100%);
+  border-top: 1px solid rgba(245, 241, 232, 0.15);
+}
+
+.inquiry-box {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.8) 0%, rgba(38, 7, 8, 0.7) 100%);
+  border: 1px solid rgba(245, 241, 232, 0.28);
+  border-radius: 20px;
+  padding: clamp(32px, 4vw, 54px) clamp(20px, 4vw, 48px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.inquiry-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5.5vw, 60px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 4px 0 14px;
+}
+
+.inquiry-subtitle {
+  max-width: 600px;
+  font-size: clamp(14px, 1.2vw, 16.5px);
+  line-height: 1.6;
+  color: var(--beige-muted);
+  margin: 0 auto 28px;
+}
+
+.inquiry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Editorial Royal Compact Footer (Height Drastically Reduced)
    ========================================================================== */
 .editorial-footer {
   position: relative;
-  background: #000000;
+  background: #050505;
   color: #ffffff;
-  padding: 0 0 50px 0;
+  padding: 24px 0 16px 0;
   width: 100%;
   overflow: hidden;
+  border-top: 1px solid rgba(245, 241, 232, 0.2);
 }
 
 .footer-top-line {
-  width: 100%;
-  height: 1px;
-  background: rgba(245, 241, 232, 0.25);
-  margin-bottom: 50px;
+  display: none;
 }
 
 .footer-cols-wrap {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 40px;
-  max-width: 1400px;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 24px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 clamp(24px, 5vw, 60px);
+  padding: 0 clamp(20px, 4vw, 40px);
 }
 
 .footer-col {
@@ -1291,20 +1488,22 @@ button {
 }
 
 .footer-label {
-  font-size: 13.5px;
+  font-family: var(--font-serif);
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--beige);
-  margin: 0 0 16px;
+  margin: 0 0 8px;
 }
 
 .footer-email-link {
-  font-size: clamp(15px, 1.4vw, 18px);
+  font-size: 15px;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 24px;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  margin-bottom: 10px;
   display: inline-block;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .footer-email-link:hover {
@@ -1315,10 +1514,10 @@ button {
 .footer-address {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   color: var(--beige-muted);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .footer-address .address-name {
@@ -1328,8 +1527,9 @@ button {
 }
 
 .footer-phone-link {
-  margin-top: 8px;
+  margin-top: 4px;
   font-weight: 600;
+  font-size: 13px;
   color: var(--beige);
   display: inline-block;
   transition: opacity 0.2s ease;
@@ -1343,19 +1543,19 @@ button {
 .col-links {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   align-items: flex-start;
 }
 
 .col-links a,
 .col-links button {
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 500;
   color: var(--beige);
   transition: all 0.2s ease;
   padding: 0;
   text-align: left;
-  line-height: 1.5;
+  line-height: 1.45;
   background: none;
   border: none;
   cursor: pointer;
@@ -1371,43 +1571,44 @@ button {
 /* Right Column - Meta / Copyright */
 .col-meta {
   color: var(--beige-muted);
-  font-size: 13.5px;
-  line-height: 1.6;
+  font-size: 12.5px;
+  line-height: 1.5;
 }
 
 .footer-copy {
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   font-weight: 700;
   color: #ffffff;
+  font-size: 13px;
 }
 
 .footer-brand-name {
-  margin: 0 0 16px;
+  margin: 0 0 8px;
   font-weight: 600;
+  font-size: 12.5px;
   color: var(--beige);
 }
 
 .footer-submeta {
-  margin: 0 0 4px;
-  font-size: 13px;
+  margin: 0;
+  font-size: 12px;
   color: var(--beige-muted);
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
-/* ==========================================================================
-   Big Brutalist-Luxury Brand Wordmark Box (indevelopment.studio style)
-   ========================================================================== */
+/* Compact Sleek Royal Wordmark Strip */
 .footer-giant-box {
-  margin: 60px clamp(20px, 4.5vw, 60px) 20px;
-  border: 3.5px solid var(--beige);
-  border-radius: 20px;
-  padding: clamp(16px, 2.5vw, 36px) clamp(20px, 4vw, 56px);
+  max-width: 1200px;
+  margin: 18px auto 6px;
+  border: 1.5px solid rgba(245, 241, 232, 0.4);
+  border-radius: 12px;
+  padding: 8px clamp(16px, 2.5vw, 28px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
-  background: #000000;
+  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+  background: rgba(245, 241, 232, 0.04);
   color: #ffffff;
   user-select: none;
 }
@@ -1415,30 +1616,32 @@ button {
 .footer-giant-box:hover {
   background: var(--beige);
   color: #000000;
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(245, 241, 232, 0.20);
+  border-color: var(--beige);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(245, 241, 232, 0.15);
 }
 
 .giant-brand-text {
-  font-size: clamp(48px, 9.8vw, 155px);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.92;
-  font-family: inherit;
-  transition: color 0.35s ease;
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 2.8vw, 36px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  transition: color 0.3s ease;
 }
 
 .giant-brand-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(70px, 12vw, 170px);
+  width: clamp(26px, 3.2vw, 38px);
   height: auto;
-  transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1);
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .footer-giant-box:hover .giant-brand-icon {
-  transform: scale(1.06) rotate(-2deg);
+  transform: scale(1.08) rotate(-2deg);
 }
 
 .footer-eye-svg {
@@ -1588,26 +1791,37 @@ button {
     padding: 24px 20px;
   }
 
-  /* Editorial Footer Mobile Styles */
+  /* Royal Sections & Compact Footer Mobile Styles */
+  .royal-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .section-head-split {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
   .footer-cols-wrap {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 20px;
     padding: 0 20px;
   }
 
   .footer-giant-box {
-    margin: 40px 16px 16px;
-    border-width: 2.5px;
-    border-radius: 14px;
-    padding: 16px 20px;
+    margin: 16px 16px 6px;
+    border-width: 1.5px;
+    border-radius: 10px;
+    padding: 8px 14px;
   }
 
   .giant-brand-text {
-    font-size: clamp(34px, 10vw, 68px);
+    font-size: clamp(18px, 4.8vw, 24px);
   }
 
   .giant-brand-icon {
-    width: clamp(48px, 13vw, 76px);
+    width: 24px;
   }
 }
 
