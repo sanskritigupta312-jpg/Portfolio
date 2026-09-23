@@ -1,60 +1,100 @@
-# Sanskriti — Cursor Tracking Portfolio
+# Sanskriti Gupta - Interactive Portfolio
 
-A React/Vite portfolio inspired by the uploaded cursor-tracking portfolio
-reference and its 3-step workflow.
+> A cursor-reactive React portfolio with a playful 3D character, smooth motion,
+> and a clean project showcase.
 
-## Run
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?style=flat-square&logo=javascript&logoColor=111111)
+
+## About
+
+This portfolio is built to feel responsive and personal rather than static.
+The hero follows the pointer with a pre-rendered animation sequence, while the
+rest of the page highlights skills, selected work, and contact links.
+
+## Features
+
+- Cursor-tracking hero interaction
+- Canvas-based WebP frame rendering
+- Responsive layout for desktop and mobile
+- Project, skills, and contact sections
+- Local placeholder character so the project works immediately
+- Vite production build ready for deployment
+
+## Quick Start
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Add the character animation
+Open the local URL shown by Vite in your browser.
 
-Place the generated directional animation at:
+Create a production build with:
 
-`public/character.mp4`
+```bash
+npm run build
+```
 
-Then install OpenCV for Python and run:
+Preview the production build with:
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```text
+.
+├── public/
+│   ├── character-placeholder.png
+│   └── frames/
+├── scripts/
+│   └── extract_frames.py
+├── src/
+│   ├── main.jsx
+│   └── styles.css
+├── index.html
+└── package.json
+```
+
+## Character Animation
+
+The project currently includes a ready-to-use placeholder character. To replace
+it with a custom animation:
+
+1. Add the source video at `public/character.mp4`.
+2. Install OpenCV for Python.
+3. Run the frame extraction script:
 
 ```bash
 npm run extract
 ```
 
-This creates 64 WebP frames in `public/frames/`.
+The script generates directional WebP frames in `public/frames/`.
 
-## Personalize
+## Personalization
 
-Edit `src/main.jsx` for:
-- email
-- LinkedIn
-- GitHub
-- project links
-- project descriptions
+Update `src/main.jsx` to change:
 
-Add your resume as:
+- Contact email and social links
+- Project names, descriptions, and URLs
+- Skills and portfolio content
 
-`public/Sanskriti_Resume.pdf`
+Add a resume at `public/Sanskriti_Resume.pdf` if you want to include one in the
+portfolio.
 
-## Important
+## Tech Stack
 
-The hero intentionally uses preloaded WebP frames and a canvas renderer,
-rather than runtime MP4 seeking. This follows the technical approach in the
-uploaded guide.
+- React 19
+- Vite
+- JavaScript
+- CSS
+- Lucide React
+- HTML Canvas
 
+## License
 
-## Temporary character
-
-A generated placeholder character is already included as:
-`public/character-placeholder.png`
-
-So you can run the portfolio now and see the character. Later, replace it
-with your own character and generate directional frames for real cursor tracking.
-
-
-## Ready-to-run temporary character
-
-This package already contains a generated temporary 3D character at
-`public/character-placeholder.png`, so the hero renders immediately.
-The final personalized character can replace it later.
+This project is a personal portfolio. Replace the content and links with your
+own details before deploying it publicly.
