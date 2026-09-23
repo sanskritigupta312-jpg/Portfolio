@@ -614,6 +614,61 @@ function MagneticCursor() {
 }
 
 /* ==========================================================================
+   Interactive 3D Perspective Tilt Card with Dynamic Glass Glare
+   ========================================================================== */
+function TiltCard({ children, className = "", style = {}, onClick, ...props }) {
+  const cardRef = useRef(null);
+  const [tiltStyle, setTiltStyle] = useState({});
+  const [glareStyle, setGlareStyle] = useState({ opacity: 0 });
+
+  const handlePointerMove = (e) => {
+    if (e.pointerType === "touch") return;
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    // Elegant, smooth 3D tilt angles (max ~6 degrees)
+    const rotateX = ((centerY - y) / centerY) * 6;
+    const rotateY = ((x - centerX) / centerX) * 6;
+
+    setTiltStyle({
+      transform: `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(10px)`,
+      transition: "transform 0.08s ease-out"
+    });
+    setGlareStyle({
+      opacity: 0.18,
+      background: `radial-gradient(circle at ${(x / rect.width * 100).toFixed(1)}% ${(y / rect.height * 100).toFixed(1)}%, rgba(255, 255, 255, 0.28) 0%, transparent 60%)`
+    });
+  };
+
+  const handlePointerLeave = () => {
+    setTiltStyle({
+      transform: "perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)",
+      transition: "transform 0.5s cubic-bezier(0.2, 0, 0, 1)"
+    });
+    setGlareStyle({ opacity: 0 });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      className={`tilt-card-3d ${className}`}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      onClick={onClick}
+      style={{ ...style, ...tiltStyle }}
+      {...props}
+    >
+      {children}
+      <div className="tilt-glare" style={glareStyle} aria-hidden="true" />
+    </div>
+  );
+}
+
+/* ==========================================================================
    Main Application with Dedicated Pages
    ========================================================================== */
 function App() {
@@ -657,6 +712,14 @@ function App() {
   return (
     <div className="app">
       <MagneticCursor />
+
+      {/* Royal Atmospheric Ambient 3D Glowing Orbs */}
+      <div className="ambient-orbs-container" aria-hidden="true">
+        <div className="ambient-orb orb-crimson-1" />
+        <div className="ambient-orb orb-gold-1" />
+        <div className="ambient-orb orb-crimson-2" />
+        <div className="ambient-orb orb-ruby-3" />
+      </div>
 
       {/* Floating Frosted-Glass Navigation Pill Centered at Top */}
       <header className="nav-container">
@@ -764,22 +827,22 @@ function App() {
                 </div>
 
                 <div className="royal-stats-bar">
-                  <div className="royal-stat-item">
+                  <TiltCard className="royal-stat-item">
                     <span className="stat-num">07+</span>
                     <span className="stat-label">Engineered Platforms</span>
-                  </div>
-                  <div className="royal-stat-item">
+                  </TiltCard>
+                  <TiltCard className="royal-stat-item">
                     <span className="stat-num">13+</span>
                     <span className="stat-label">Accredited Honors</span>
-                  </div>
-                  <div className="royal-stat-item">
+                  </TiltCard>
+                  <TiltCard className="royal-stat-item">
                     <span className="stat-num">02</span>
                     <span className="stat-label">Industry Internships</span>
-                  </div>
-                  <div className="royal-stat-item">
+                  </TiltCard>
+                  <TiltCard className="royal-stat-item">
                     <span className="stat-num">60 FPS</span>
                     <span className="stat-label">Zero-Lag Fluidity</span>
-                  </div>
+                  </TiltCard>
                 </div>
               </div>
             </section>
@@ -792,7 +855,7 @@ function App() {
               </div>
 
               <div className="highlights-grid">
-                <div className="highlight-card" onClick={() => navigateTo("experience")}>
+                <TiltCard className="highlight-card" onClick={() => navigateTo("experience")}>
                   <div className="highlight-icon">
                     <Briefcase size={26} />
                   </div>
@@ -804,9 +867,9 @@ function App() {
                   <span className="card-cta">
                     View Experience <ChevronRight size={16} />
                   </span>
-                </div>
+                </TiltCard>
 
-                <div className="highlight-card" onClick={() => navigateTo("about")}>
+                <TiltCard className="highlight-card" onClick={() => navigateTo("about")}>
                   <div className="highlight-icon">
                     <GraduationCap size={26} />
                   </div>
@@ -818,9 +881,9 @@ function App() {
                   <span className="card-cta">
                     About My Journey <ChevronRight size={16} />
                   </span>
-                </div>
+                </TiltCard>
 
-                <div className="highlight-card" onClick={() => navigateTo("projects")}>
+                <TiltCard className="highlight-card" onClick={() => navigateTo("projects")}>
                   <div className="highlight-icon">
                     <Code2 size={26} />
                   </div>
@@ -832,9 +895,9 @@ function App() {
                   <span className="card-cta">
                     Browse All Projects <ChevronRight size={16} />
                   </span>
-                </div>
+                </TiltCard>
 
-                <div className="highlight-card" onClick={() => navigateTo("certificates")}>
+                <TiltCard className="highlight-card" onClick={() => navigateTo("certificates")}>
                   <div className="highlight-icon">
                     <Award size={26} />
                   </div>
@@ -846,7 +909,7 @@ function App() {
                   <span className="card-cta">
                     View Certifications <ChevronRight size={16} />
                   </span>
-                </div>
+                </TiltCard>
               </div>
             </section>
 
@@ -868,7 +931,7 @@ function App() {
 
               <div className="project-grid">
                 {projectsData.slice(0, 4).map((p, i) => (
-                  <article className="project-card" key={p.title}>
+                  <TiltCard className="project-card" key={p.title}>
                     <div className="project-number">0{i + 1}</div>
                     <p className="project-type">{p.type}</p>
                     <h3>{p.title}</h3>
@@ -896,7 +959,7 @@ function App() {
                         <Github size={15} /> Code
                       </a>
                     </div>
-                  </article>
+                  </TiltCard>
                 ))}
               </div>
             </section>
@@ -919,7 +982,7 @@ function App() {
 
               <div className="experience-list">
                 {experienceData.map((exp) => (
-                  <article className="exp-card" key={exp.company}>
+                  <TiltCard className="exp-card" key={exp.company}>
                     <div className="exp-header">
                       <div>
                         <div className="exp-type-tag">{exp.type}</div>
@@ -943,14 +1006,14 @@ function App() {
                         ))}
                       </div>
                     </div>
-                  </article>
+                  </TiltCard>
                 ))}
               </div>
             </section>
 
             {/* Royal Inquiry Banner (Styled after Reference Screenshot) */}
             <section className="section royal-inquiry-section">
-              <div className="inquiry-box">
+              <TiltCard className="inquiry-box">
                 <p className="royal-sub-eyebrow">RATHER TALK IT THROUGH</p>
                 <h2 className="inquiry-title">GET IN TOUCH.</h2>
                 <p className="inquiry-subtitle">
@@ -973,7 +1036,7 @@ function App() {
                     <Download size={16} /> Download Curriculum Vitae
                   </a>
                 </div>
-              </div>
+              </TiltCard>
             </section>
           </div>
         )}

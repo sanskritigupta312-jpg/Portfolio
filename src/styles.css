@@ -276,14 +276,17 @@ button {
 }
 
 /* ==========================================================================
-   Page Wrapper & Inner Pages
+   Page Wrapper & Inner Pages - Seamless Velvet Red Atmosphere
    ========================================================================== */
 .page-wrapper {
   position: relative;
   min-height: 80vh;
+  background: radial-gradient(circle at 50% 0%, #b80506 0%, #3d0204 40%, #150102 100%);
 }
 
 .page-view {
+  position: relative;
+  z-index: 2;
   animation: fadeInPage 0.35s ease-out;
 }
 
@@ -302,6 +305,8 @@ button {
   padding: 130px clamp(24px, 8vw, 120px) 90px;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .section-head {
@@ -359,16 +364,18 @@ button {
 
 /* ==========================================================================
    Editorial Brutalist Brand & Tech Marquee (indevelopment.studio inspired)
-   Compact spacing, Red / Black / White / Beige palette
+   Seamless Royal Transition from Hero Red to Deep Velvet Crimson
    ========================================================================== */
 .editorial-marquee-section {
   position: relative;
-  background: var(--black);
+  background: linear-gradient(180deg, #b00708 0%, #4a0305 60%, #1f0103 100%);
   color: var(--white);
-  padding: 34px 0 28px 0;
-  border-top: 1px solid rgba(245, 241, 232, 0.22);
+  padding: 38px 0 30px 0;
+  border-top: 1px solid rgba(245, 241, 232, 0.35);
   border-bottom: 1px solid rgba(245, 241, 232, 0.22);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
   overflow: hidden;
+  z-index: 2;
 }
 
 .marquee-header-box {
@@ -474,9 +481,10 @@ button {
 }
 
 .marquee-bullet {
-  color: var(--red);
+  color: #ff3335;
   font-size: 16px;
   line-height: 1;
+  text-shadow: 0 0 10px rgba(255, 51, 53, 0.6);
 }
 
 .marquee-text {
@@ -485,52 +493,54 @@ button {
 }
 
 /* ==========================================================================
-   Highlights Section (Home Page)
+   Highlights Section (Curated Pillars) - Rich Deep Wine & Ruby Glow
    ========================================================================== */
 .highlights-section {
-  padding: 50px clamp(20px, 6vw, 100px);
-  background: linear-gradient(180deg, #080808 0%, #150202 100%);
-  border-top: 1px solid rgba(245, 241, 232, 0.18);
+  position: relative;
+  padding: 70px clamp(20px, 6vw, 100px);
+  background: linear-gradient(180deg, #170102 0%, #240204 50%, #150102 100%);
+  border-top: 1px solid rgba(245, 241, 232, 0.16);
+  z-index: 2;
 }
 
 .highlights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  gap: 22px;
   margin-top: 28px;
 }
 
 .highlight-card {
-  background: rgba(245, 241, 232, 0.07);
-  border: 1px solid rgba(245, 241, 232, 0.20);
-  border-radius: 20px;
-  padding: 26px 22px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: linear-gradient(145deg, rgba(245, 241, 232, 0.08) 0%, rgba(230, 9, 10, 0.08) 60%, rgba(25, 2, 4, 0.45) 100%);
+  border: 1px solid rgba(245, 241, 232, 0.24);
+  border-radius: 22px;
+  padding: 28px 24px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.20), 0 0 22px rgba(230, 9, 10, 0.12);
+  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .highlight-card:hover {
-  transform: translateY(-5px);
-  background: rgba(245, 241, 232, 0.14);
-  border-color: rgba(245, 241, 232, 0.45);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  border-color: rgba(245, 241, 232, 0.55);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 0 35px rgba(230, 9, 10, 0.25);
 }
 
 .highlight-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: rgba(230, 9, 10, 0.20);
-  border: 1px solid rgba(230, 9, 10, 0.50);
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(230, 9, 10, 0.40) 0%, rgba(140, 4, 5, 0.30) 100%);
+  border: 1px solid rgba(245, 241, 232, 0.35);
   color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(230, 9, 10, 0.35);
 }
 
 .highlight-card h3 {
@@ -1302,11 +1312,151 @@ button {
   letter-spacing: 0.01em;
 }
 
+/* ==========================================================================
+   Royal Atmospheric Ambient 3D Glowing Orbs & Soft Animations
+   ========================================================================== */
+.ambient-orbs-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.orb-crimson-1 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(230, 9, 10, 0.40) 0%, rgba(230, 9, 10, 0.12) 60%, transparent 100%);
+  top: 900px;
+  right: -100px;
+  animation: floatOrb1 18s ease-in-out infinite alternate;
+}
+
+.orb-gold-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(245, 241, 232, 0.22) 0%, rgba(245, 241, 232, 0.05) 60%, transparent 100%);
+  top: 1800px;
+  left: -120px;
+  animation: floatOrb2 20s ease-in-out infinite alternate;
+}
+
+.orb-crimson-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(200, 7, 8, 0.35) 0%, rgba(140, 4, 5, 0.10) 65%, transparent 100%);
+  top: 3000px;
+  right: -120px;
+  animation: floatOrb1 22s ease-in-out infinite alternate-reverse;
+}
+
+.orb-ruby-3 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(230, 9, 10, 0.30) 0%, rgba(245, 241, 232, 0.10) 70%, transparent 100%);
+  top: 4500px;
+  left: 10%;
+  animation: floatOrb2 16s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(40px, -50px, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-30px, 30px, 0) scale(0.92);
+  }
+}
+
+@keyframes floatOrb2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-45px, 60px, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(35px, -35px, 0) scale(0.95);
+  }
+}
+
+/* ==========================================================================
+   3D Perspective Card Tilt & Dynamic Glare
+   ========================================================================== */
+.tilt-card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.25s ease-out;
+}
+
+/* ==========================================================================
+   Royal Editorial Touch & Expanded Home Page Components
+   ========================================================================== */
+.royal-sub-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--beige);
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.royal-serif-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4.2vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+}
+
+.royal-serif-heading em {
+  font-family: var(--font-cormorant);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--beige);
+  letter-spacing: 0.01em;
+}
+
 .royal-manifesto-section {
-  padding: 60px clamp(20px, 6vw, 100px);
-  background: linear-gradient(180deg, #0a0101 0%, #080808 100%);
-  border-top: 1px solid rgba(245, 241, 232, 0.2);
-  border-bottom: 1px solid rgba(245, 241, 232, 0.15);
+  position: relative;
+  padding: 80px clamp(20px, 6vw, 100px) 70px;
+  background: linear-gradient(180deg, #1f0103 0%, #290305 50%, #170102 100%);
+  border-bottom: 1px solid rgba(245, 241, 232, 0.16);
+  z-index: 2;
 }
 
 .manifesto-inner {
@@ -1316,7 +1466,7 @@ button {
 
 .manifesto-header {
   max-width: 860px;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
 .manifesto-paragraph {
@@ -1338,14 +1488,29 @@ button {
 .royal-stat-item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(245, 241, 232, 0.08) 0%, rgba(230, 9, 10, 0.12) 100%);
+  border: 1px solid rgba(245, 241, 232, 0.25);
+  border-radius: 18px;
+  padding: 24px 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.20), 0 0 20px rgba(230, 9, 10, 0.12);
+  transition: all 0.3s ease;
+}
+
+.royal-stat-item:hover {
+  border-color: rgba(245, 241, 232, 0.55);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 0 30px rgba(230, 9, 10, 0.25);
 }
 
 .royal-stat-item .stat-num {
   font-family: var(--font-serif);
-  font-size: clamp(28px, 3.5vw, 44px);
+  font-size: clamp(30px, 3.8vw, 48px);
   font-weight: 800;
-  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f1e8 50%, #ff8b8c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
   line-height: 1;
 }
@@ -1361,15 +1526,56 @@ button {
 
 .royal-works-section,
 .royal-experience-section {
-  padding: 70px clamp(20px, 6vw, 100px);
-  background: #080808;
-  border-top: 1px solid rgba(245, 241, 232, 0.15);
+  position: relative;
+  padding: 80px clamp(20px, 6vw, 100px);
+  background: linear-gradient(180deg, #150102 0%, #200204 50%, #120102 100%);
+  border-top: 1px solid rgba(245, 241, 232, 0.16);
+  z-index: 2;
+}
+
+.royal-experience-section {
+  background: linear-gradient(180deg, #120102 0%, #1c0204 50%, #0f0102 100%);
 }
 
 .royal-works-section .project-grid,
 .royal-experience-section .experience-list {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.project-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(245, 241, 232, 0.08) 0%, rgba(230, 9, 10, 0.08) 55%, rgba(18, 1, 2, 0.5) 100%);
+  border: 1px solid rgba(245, 241, 232, 0.25);
+  border-radius: 22px;
+  padding: 32px 28px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.20), 0 0 25px rgba(230, 9, 10, 0.12);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.project-card:hover {
+  border-color: rgba(245, 241, 232, 0.6);
+  box-shadow: 0 26px 55px rgba(0, 0, 0, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 0 35px rgba(230, 9, 10, 0.26);
+}
+
+.exp-card {
+  background: linear-gradient(145deg, rgba(245, 241, 232, 0.08) 0%, rgba(230, 9, 10, 0.07) 50%, rgba(15, 1, 2, 0.5) 100%);
+  border: 1px solid rgba(245, 241, 232, 0.24);
+  border-radius: 22px;
+  padding: 34px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.20), 0 0 25px rgba(230, 9, 10, 0.12);
+  transition: all 0.3s ease;
+}
+
+.exp-card:hover {
+  border-color: rgba(245, 241, 232, 0.55);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 0 35px rgba(230, 9, 10, 0.25);
 }
 
 .section-head-split {
@@ -1410,25 +1616,27 @@ button {
 }
 
 .royal-inquiry-section {
-  padding: 60px clamp(20px, 6vw, 100px) 70px;
-  background: linear-gradient(180deg, #080808 0%, #000000 100%);
-  border-top: 1px solid rgba(245, 241, 232, 0.15);
+  position: relative;
+  padding: 70px clamp(20px, 6vw, 100px) 80px;
+  background: linear-gradient(180deg, #0f0102 0%, #190203 50%, #0c0001 100%);
+  border-top: 1px solid rgba(245, 241, 232, 0.16);
+  z-index: 2;
 }
 
 .inquiry-box {
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(135deg, rgba(20, 20, 20, 0.8) 0%, rgba(38, 7, 8, 0.7) 100%);
-  border: 1px solid rgba(245, 241, 232, 0.28);
-  border-radius: 20px;
-  padding: clamp(32px, 4vw, 54px) clamp(20px, 4vw, 48px);
+  background: linear-gradient(135deg, rgba(245, 241, 232, 0.08) 0%, rgba(230, 9, 10, 0.15) 50%, rgba(20, 2, 3, 0.85) 100%);
+  border: 1.5px solid rgba(245, 241, 232, 0.35);
+  border-radius: 24px;
+  padding: clamp(38px, 4.5vw, 60px) clamp(22px, 4.5vw, 54px);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.3), 0 0 45px rgba(230, 9, 10, 0.28);
 }
 
 .inquiry-title {
@@ -1457,16 +1665,18 @@ button {
 }
 
 /* ==========================================================================
-   Editorial Royal Compact Footer (Height Drastically Reduced)
+   Editorial Brutalist-Luxury Footer - Balanced, Iconic & Connected to Royal Noir
    ========================================================================== */
 .editorial-footer {
   position: relative;
-  background: #050505;
+  background: linear-gradient(180deg, #0c0001 0%, #050000 100%);
   color: #ffffff;
-  padding: 24px 0 16px 0;
+  padding: 44px 0 32px 0;
   width: 100%;
   overflow: hidden;
-  border-top: 1px solid rgba(245, 241, 232, 0.2);
+  border-top: 1px solid rgba(245, 241, 232, 0.25);
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
+  z-index: 2;
 }
 
 .footer-top-line {
@@ -1475,11 +1685,11 @@ button {
 
 .footer-cols-wrap {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
-  gap: 24px;
-  max-width: 1200px;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  gap: 36px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 40px);
+  padding: 0 clamp(24px, 5vw, 60px);
 }
 
 .footer-col {
@@ -1489,73 +1699,73 @@ button {
 
 .footer-label {
   font-family: var(--font-serif);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.20em;
   text-transform: uppercase;
   color: var(--beige);
-  margin: 0 0 8px;
+  margin: 0 0 12px;
 }
 
 .footer-email-link {
-  font-size: 15px;
+  font-size: clamp(15.5px, 1.4vw, 18px);
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   display: inline-block;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
 .footer-email-link:hover {
-  opacity: 0.75;
-  transform: translateX(2px);
+  color: var(--beige);
+  transform: translateX(3px);
 }
 
 .footer-address {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   color: var(--beige-muted);
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 13.5px;
+  line-height: 1.5;
 }
 
 .footer-address .address-name {
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .footer-phone-link {
-  margin-top: 4px;
+  margin-top: 6px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--beige);
   display: inline-block;
   transition: opacity 0.2s ease;
 }
 
 .footer-phone-link:hover {
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 /* Middle Column - Links List */
 .col-links {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   align-items: flex-start;
 }
 
 .col-links a,
 .col-links button {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--beige);
   transition: all 0.2s ease;
   padding: 0;
   text-align: left;
-  line-height: 1.45;
+  line-height: 1.5;
   background: none;
   border: none;
   cursor: pointer;
@@ -1565,50 +1775,50 @@ button {
 .col-links button:hover {
   color: #ffffff;
   transform: translateX(4px);
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 /* Right Column - Meta / Copyright */
 .col-meta {
   color: var(--beige-muted);
-  font-size: 12.5px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .footer-copy {
-  margin: 0 0 2px;
+  margin: 0 0 3px;
   font-weight: 700;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 13.5px;
 }
 
 .footer-brand-name {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   font-weight: 600;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--beige);
 }
 
 .footer-submeta {
-  margin: 0;
+  margin: 0 0 2px;
   font-size: 12px;
   color: var(--beige-muted);
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
-/* Compact Sleek Royal Wordmark Strip */
+/* Big Brutalist-Luxury Brand Wordmark Box - Balanced Size */
 .footer-giant-box {
-  max-width: 1200px;
-  margin: 18px auto 6px;
-  border: 1.5px solid rgba(245, 241, 232, 0.4);
-  border-radius: 12px;
-  padding: 8px clamp(16px, 2.5vw, 28px);
+  max-width: 1300px;
+  margin: 34px clamp(24px, 5vw, 60px) 14px;
+  border: 2.5px solid var(--beige);
+  border-radius: 16px;
+  padding: clamp(14px, 2vw, 24px) clamp(22px, 3.5vw, 44px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-  background: rgba(245, 241, 232, 0.04);
+  transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
+  background: rgba(245, 241, 232, 0.05);
   color: #ffffff;
   user-select: none;
 }
@@ -1616,28 +1826,26 @@ button {
 .footer-giant-box:hover {
   background: var(--beige);
   color: #000000;
-  border-color: var(--beige);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(245, 241, 232, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 35px rgba(245, 241, 232, 0.22);
 }
 
 .giant-brand-text {
-  font-family: var(--font-serif);
-  font-size: clamp(20px, 2.8vw, 36px);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  line-height: 1.1;
-  transition: color 0.3s ease;
+  font-size: clamp(44px, 6.8vw, 92px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-family: inherit;
+  transition: color 0.35s ease;
 }
 
 .giant-brand-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(26px, 3.2vw, 38px);
+  width: clamp(44px, 6vw, 76px);
   height: auto;
-  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .footer-giant-box:hover .giant-brand-icon {
@@ -1805,23 +2013,23 @@ button {
 
   .footer-cols-wrap {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 24px;
     padding: 0 20px;
   }
 
   .footer-giant-box {
-    margin: 16px 16px 6px;
-    border-width: 1.5px;
-    border-radius: 10px;
-    padding: 8px 14px;
+    margin: 24px 16px 10px;
+    border-width: 2px;
+    border-radius: 12px;
+    padding: 12px 18px;
   }
 
   .giant-brand-text {
-    font-size: clamp(18px, 4.8vw, 24px);
+    font-size: clamp(30px, 8.5vw, 48px);
   }
 
   .giant-brand-icon {
-    width: 24px;
+    width: clamp(34px, 8vw, 44px);
   }
 }
 
