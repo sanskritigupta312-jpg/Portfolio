@@ -1,10 +1,9 @@
 import React, { useState, useMemo } from "react";
-import { ExternalLink, Github } from "lucide-react";
-import TiltCard from "../components/TiltCard";
+import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import { projectsData } from "../data/portfolioData";
 
 /* ==========================================================================
-   PAGE 4: PROJECTS (Interactive Filter Tabs & 3D Perspective Tilt Cards)
+   Projects Page: Sandeep.design Editorial Directory Layout
    ========================================================================== */
 export default function Projects() {
   const [projectFilter, setProjectFilter] = useState("all");
@@ -15,73 +14,108 @@ export default function Projects() {
   }, [projectFilter]);
 
   return (
-    <div className="page-view inner-page projects-page">
-      <div className="section-head">
-        <p className="eyebrow">Portfolio Works</p>
-        <h2>Things I've engineered.</h2>
-        <p className="section-sub">
-          A showcase of modern web platforms, clones, responsive UI concepts, and interactive tools built with clean architecture.
-        </p>
+    <div className="page-view sd-inner-page">
+      <div className="sd-tag-bar">
+        <div className="sd-tag-left">
+          <span>PORTFOLIO &mdash; WORKS DIRECTORY</span>
+        </div>
+        <span className="sd-tag-right">{filteredProjects.length} / {projectsData.length} WORKS</span>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="filter-pill-bar">
+      <h1 className="sd-display-title">
+        All Works &amp; <span className="sd-accent">Engineered Systems</span>.
+      </h1>
+      <p className="sd-sub-manifesto">
+        A directory of production-ready web platforms, full-stack architectures, interactive utilities, and algorithmic logic.
+      </p>
+
+      {/* Filter Tabs in Sandeep Minimal Style */}
+      <div className="sd-filter-bar">
         <button
           type="button"
-          className={`filter-btn ${projectFilter === "all" ? "active" : ""}`}
+          className={`sd-filter-btn ${projectFilter === "all" ? "active" : ""}`}
           onClick={() => setProjectFilter("all")}
         >
-          All Projects ({projectsData.length})
+          All Works ({projectsData.length})
         </button>
         <button
           type="button"
-          className={`filter-btn ${projectFilter === "web" ? "active" : ""}`}
+          className={`sd-filter-btn ${projectFilter === "web" ? "active" : ""}`}
           onClick={() => setProjectFilter("web")}
         >
           Web &amp; Full Stack (4)
         </button>
         <button
           type="button"
-          className={`filter-btn ${projectFilter === "interactive" ? "active" : ""}`}
+          className={`sd-filter-btn ${projectFilter === "interactive" ? "active" : ""}`}
           onClick={() => setProjectFilter("interactive")}
         >
           Interactive &amp; Games (3)
         </button>
       </div>
 
-      {/* Projects Grid */}
-      <div className="project-grid">
-        {filteredProjects.map((p, i) => (
-          <TiltCard className="project-card" key={p.title}>
-            <div className="project-number">0{i + 1}</div>
-            <p className="project-type">{p.type}</p>
-            <h3>{p.title}</h3>
-            <p className="project-desc">{p.description}</p>
-            <div className="tags">
-              {p.stack.map((s) => (
-                <span key={s}>{s}</span>
-              ))}
+      {/* Sandeep Works Table */}
+      <div className="sd-works-table">
+        {filteredProjects.map((p, idx) => (
+          <div key={p.title} className="sd-work-row">
+            <span className="sd-work-index">P.0{idx + 1}</span>
+
+            <div className="sd-work-title-wrap">
+              <h3>{p.title}</h3>
+              <p>{p.description}</p>
             </div>
 
-            <div className="card-links">
-              <a
-                href={p.demo}
-                target="_blank"
-                rel="noreferrer"
-                className="project-link"
-              >
-                Live Demo <ExternalLink size={15} />
-              </a>
-              <a
-                href={p.source}
-                target="_blank"
-                rel="noreferrer"
-                className="project-sublink"
-              >
-                <Github size={15} /> Code
-              </a>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <span className="sd-work-cat">{p.type}</span>
+              <div style={{ display: "flex", gap: "10px", marginTop: "4px" }}>
+                <a
+                  href={p.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    fontSize: "11.5px",
+                    fontWeight: "700",
+                    fontFamily: "var(--sd-font-mono)",
+                    textTransform: "uppercase",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "4px",
+                    color: "var(--sd-accent)"
+                  }}
+                >
+                  Live <ExternalLink size={12} />
+                </a>
+                <a
+                  href={p.source}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    fontSize: "11.5px",
+                    fontWeight: "700",
+                    fontFamily: "var(--sd-font-mono)",
+                    textTransform: "uppercase",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "4px",
+                    color: "var(--sd-text-muted)"
+                  }}
+                >
+                  Code <Github size={12} />
+                </a>
+              </div>
             </div>
-          </TiltCard>
+
+            <span className="sd-work-year">2025&ndash;26</span>
+            <a
+              href={p.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="sd-work-arrow"
+              title="Open Live Demo"
+            >
+              ↗
+            </a>
+          </div>
         ))}
       </div>
     </div>

@@ -1,45 +1,51 @@
 import React from "react";
-import { Award, ArrowUpRight } from "lucide-react";
-import TiltCard from "../components/TiltCard";
+import { ArrowUpRight } from "lucide-react";
 import { certificatesData, getCertLink } from "../data/portfolioData";
 
 /* ==========================================================================
-   PAGE 5: CERTIFICATES (13 Accredited Honors & Certifications)
+   Certificates Page: Sandeep.design Editorial Honors Table
    ========================================================================== */
 export default function Certificates() {
   return (
-    <div className="page-view inner-page certificates-page">
-      <div className="section-head">
-        <p className="eyebrow">Milestones</p>
-        <h2>Licenses &amp; Certifications.</h2>
-        <p className="section-sub">
-          13 accredited certifications spanning prompt engineering, cloud computing, cybersecurity, web development, and robotics.
-        </p>
+    <div className="page-view sd-inner-page">
+      <div className="sd-tag-bar">
+        <div className="sd-tag-left">
+          <span>MILESTONES &mdash; ACCREDITED CERTIFICATIONS</span>
+        </div>
+        <span className="sd-tag-right">{certificatesData.length} CREDENTIALS</span>
       </div>
 
-      <div className="certs-grid">
+      <h1 className="sd-display-title">
+        Validated technical <span className="sd-accent">competencies</span>.
+      </h1>
+      <p className="sd-sub-manifesto">
+        13 accredited industry credentials spanning cloud computing, prompt engineering, cybersecurity, modern web engineering, and robotics.
+      </p>
+
+      {/* Sandeep Certificates Table */}
+      <div className="sd-certs-table">
         {certificatesData.map((c, i) => (
-          <TiltCard className="cert-card" key={c.title + i}>
-            <div className="cert-header">
-              <div className="cert-badge">
-                <Award size={20} />
-              </div>
-              <span className="cert-date">{c.year}</span>
+          <div className="sd-cert-row" key={c.title + i}>
+            <span className="sd-cert-index">C.{String(i + 1).padStart(2, "0")}</span>
+
+            <div className="sd-cert-title-col">
+              <h4>{c.title}</h4>
+              <p>{c.org}</p>
             </div>
 
-            <h3>{c.title}</h3>
-            <p className="cert-org">{c.org}</p>
-            <p className="cert-desc">{c.description}</p>
+            <div className="sd-cert-desc">{c.description}</div>
+
+            <span className="sd-cert-year">{c.year}</span>
 
             <a
               href={getCertLink(c.file)}
               target="_blank"
               rel="noreferrer"
-              className="cert-link"
+              className="sd-cert-link"
             >
-              View Credential <ArrowUpRight size={15} />
+              View Credential <ArrowUpRight size={13} />
             </a>
-          </TiltCard>
+          </div>
         ))}
       </div>
     </div>

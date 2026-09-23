@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import EditorialFooter from "./components/EditorialFooter";
 import MagneticCursor from "./components/MagneticCursor";
-import AmbientOrbs from "./components/AmbientOrbs";
-import BrandMarquee from "./components/BrandMarquee";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Experience from "./pages/Experience";
@@ -47,9 +45,6 @@ export default function App() {
       {/* 3D Magnetic Dual-Dot Cursor */}
       <MagneticCursor />
 
-      {/* Floating Ambient Glowing Orbs */}
-      <AmbientOrbs />
-
       {/* Frosted Glass Navigation Pill */}
       <Navbar currentPage={currentPage} navigateTo={navigateTo} />
 
@@ -61,9 +56,6 @@ export default function App() {
         {currentPage === "projects" && <Projects />}
         {currentPage === "certificates" && <Certificates />}
         {currentPage === "contact" && <Contact />}
-
-        {/* Brand marquee ticker on inner pages for continuity */}
-        {currentPage !== "home" && <BrandMarquee />}
       </main>
 
       {/* Balanced Editorial Brutalist-Luxury Footer */}
