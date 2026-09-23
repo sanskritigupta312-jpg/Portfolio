@@ -272,6 +272,89 @@ const getCertLink = (filename) => {
 };
 
 /* ==========================================================================
+   Editorial Brutalist Brand & Tech Marquee (indevelopment.studio inspired)
+   - Compact vertical spacing (no excessive blank gaps)
+   - Red, Black, White, Beige luxury palette
+   - Infinite smooth ticker loop
+   ========================================================================== */
+const partnersList = [
+  "CodeAir Software Solutions",
+  "Deloitte Australia",
+  "Kalinga University",
+  "IIIT Naya Raipur",
+  "CodeWebx Technologies",
+  "Tech Mahindra Foundation",
+  "IEEE KU SB",
+  "AICTE & MoE",
+  "AWS Educate",
+  "Oracle Academy"
+];
+
+const techList = [
+  "React.js",
+  "Next.js",
+  "Tailwind CSS",
+  "JavaScript (ES6+)",
+  "Node.js",
+  "Express.js",
+  "MongoDB",
+  "Firebase",
+  "PostgreSQL",
+  "HTML5 & CSS3",
+  "Vite",
+  "Canvas 2D",
+  "Git & GitHub",
+  "REST APIs"
+];
+
+function BrandMarquee() {
+  return (
+    <section className="editorial-marquee-section" aria-label="Experience and Technologies">
+      <div className="marquee-header-box">
+        <h2 className="marquee-headline">
+          Based in Raipur, India. Crafting scalable web platforms &amp; creative digital experiences.
+        </h2>
+      </div>
+
+      {/* Row 1: Partners & Experience */}
+      <div className="marquee-group">
+        <div className="marquee-tag-container">
+          <span className="editorial-badge">partners &amp; experience</span>
+        </div>
+        <div className="marquee-strip-outer">
+          <div className="marquee-strip-track">
+            {[...partnersList, ...partnersList, ...partnersList].map((name, i) => (
+              <span className="marquee-pill-item" key={i}>
+                <span className="marquee-bullet">&bull;</span>
+                <span className="marquee-text">{name}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Row 2: Core Technologies (Reverse Direction) */}
+      <div className="marquee-group">
+        <div className="marquee-tag-container">
+          <span className="editorial-badge">core technologies</span>
+        </div>
+        <div className="marquee-strip-outer">
+          <div className="marquee-strip-track marquee-track-reverse">
+            {[...techList, ...techList, ...techList].map((tech, i) => (
+              <span className="marquee-pill-item" key={i}>
+                <span className="marquee-bullet">&bull;</span>
+                <span className="marquee-text">{tech}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+/* ==========================================================================
    Ultra-Smooth 60 FPS Canvas Cursor Character
    - Pre-optimized WebP frames (~1.68 MB total)
    - Instant visual response (center.webp displayed in <50ms)
@@ -663,6 +746,9 @@ function App() {
                 <span /> Explore Portfolio
               </div>
             </section>
+
+            {/* Editorial Brutalist Brand & Tech Marquee Carousel */}
+            <BrandMarquee />
 
             {/* Quick Portfolio Highlights Section */}
             <section className="section highlights-section">
@@ -1126,6 +1212,8 @@ function App() {
             </div>
           </div>
         )}
+
+        {currentPage !== "home" && <BrandMarquee />}
       </main>
 
       <footer className="editorial-footer">
