@@ -9,7 +9,7 @@ import { projectsData, experienceData } from "../data/portfolioData";
    - Warm Greige (#e5e3dc), Charcoal (#111111) & Red (#e63b2e) Accent
    ========================================================================== */
 export default function Home({ navigateTo }) {
-  const featuredProject = projectsData[0]; // Modern Shoe Store UI
+  const featuredProject = projectsData.find((p) => p.slug === "modern-shoe") || projectsData[0];
 
   return (
     <div className="page-view home-view">
@@ -111,16 +111,31 @@ export default function Home({ navigateTo }) {
           <div className="sd-featured-preview">
             <div className="sd-mockup-frame">
               <div className="sd-mockup-topbar">
-                <div className="sd-mockup-dot" />
-                <div className="sd-mockup-dot" />
-                <div className="sd-mockup-dot" />
+                <div style={{ display: "flex", gap: "6px" }}>
+                  <div className="sd-mockup-dot" />
+                  <div className="sd-mockup-dot" />
+                  <div className="sd-mockup-dot" />
+                </div>
+                <span className="sd-mockup-url">modern-shoe-web-ui-react.vercel.app</span>
+                <a
+                  href={featuredProject.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: "rgba(255,255,255,0.7)" }}
+                  title="Open live site"
+                >
+                  <ExternalLink size={12} />
+                </a>
               </div>
-              <div className="sd-mockup-screen">
-                <span className="sd-screen-tag">REACT &bull; E-COMMERCE UI &bull; PRODUCTION READY</span>
-                <h4 className="sd-screen-headline">Next-Generation Footwear Store</h4>
-                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.7)", margin: "0", lineHeight: "1.5" }}>
-                  Interactive sneaker discovery catalog with high-fidelity animations, responsive mobile design, and fluid cart micro-interactions.
-                </p>
+              <div className="sd-mockup-img-wrap">
+                <img
+                  src={featuredProject.image}
+                  alt={featuredProject.title}
+                  className="sd-mockup-img"
+                  loading="lazy"
+                />
+              </div>
+              <div className="sd-mockup-screen-bar">
                 <div className="sd-screen-stats">
                   <div className="sd-screen-stat-box">
                     <span>Performance</span>
@@ -131,7 +146,7 @@ export default function Home({ navigateTo }) {
                     <strong>60 FPS</strong>
                   </div>
                   <div className="sd-screen-stat-box">
-                    <span>Stack</span>
+                    <span>Tech Stack</span>
                     <strong>React + Vite</strong>
                   </div>
                 </div>
@@ -149,18 +164,18 @@ export default function Home({ navigateTo }) {
           <div className="sd-tag-left">
             <span>02 &mdash; SELECTED WORKS</span>
           </div>
-          <span className="sd-tag-right">7 WORKS INDEX</span>
+          <span className="sd-tag-right">{projectsData.length} WORKS INDEX</span>
         </div>
 
         <h2 className="sd-display-title">
           Things I've engineered with <span className="sd-accent">precision</span>.
         </h2>
         <p className="sd-sub-manifesto">
-          A curated index of responsive web platforms, full-stack clones, interactive utilities, and algorithmic systems.
+          A curated selection from 18 repositories spanning 3D WebGL pipelines, full-stack applications, interactive utilities, and algorithmic logic.
         </p>
 
         <div className="sd-works-table">
-          {projectsData.map((project, idx) => (
+          {projectsData.slice(0, 6).map((project, idx) => (
             <div
               key={project.title}
               className="sd-work-row"
@@ -175,7 +190,7 @@ export default function Home({ navigateTo }) {
               </div>
 
               <span className="sd-work-cat">{project.type}</span>
-              <span className="sd-work-year">2025&ndash;26</span>
+              <span className="sd-work-year">{project.year}</span>
               <span className="sd-work-arrow">↗</span>
             </div>
           ))}
@@ -187,7 +202,7 @@ export default function Home({ navigateTo }) {
             className="sd-btn-outline"
             onClick={() => navigateTo("projects")}
           >
-            Explore All 7 Projects <ArrowUpRight size={14} />
+            Explore All {projectsData.length} Projects with Full Screenshots <ArrowUpRight size={14} />
           </button>
         </div>
       </section>
