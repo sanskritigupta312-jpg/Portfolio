@@ -1,5 +1,5 @@
-import React from "react";
-import { ArrowUpRight, Github, ExternalLink, Download } from "lucide-react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { ArrowUpRight, Github, ExternalLink, Download, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import CursorCharacter from "../components/CursorCharacter";
 import { projectsData, experienceData } from "../data/portfolioData";
 
@@ -7,9 +7,114 @@ import { projectsData, experienceData } from "../data/portfolioData";
    Home Page: Sandeep.design Layout & Color Architecture
    - Strict Hero Content & 60fps Canvas Character Preserved
    - Warm Greige (#e5e3dc), Charcoal (#111111) & Red (#e63b2e) Accent
+   - 3-Second Smooth Auto-Carousel with Left/Right Touch & Manual Controls
    ========================================================================== */
 export default function Home({ navigateTo }) {
-  const featuredProject = projectsData.find((p) => p.slug === "modern-shoe") || projectsData[0];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [animKey, setAnimKey] = useState(0);
+  const touchStartXRef = useRef(null);
+  const touchStartYRef = useRef(null);
+
+  const currentProject = projectsData[currentIndex] || projectsData[0];
+
+  // 3-Second Smooth Auto-Rotation Loop
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % projectsData.length);
+      setAnimKey((prev) => prev + 1);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  // Next & Previous Navigation
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % projectsData.length);
+    setAnimKey((prev) => prev + 1);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + projectsData.length) % projectsData.length);
+    setAnimKey((prev) => prev + 1);
+  }, []);
+
+  // Touch Swipe Handlers (Left touch/swipe -> next, Right touch/swipe -> prev)
+  const handleTouchStart = (e) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartXRef.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
+      if (deltaX < 0) {
+        // Swiped Left -> Advance to next project
+        handleNext();
+      } else {
+        // Swiped Right -> Return to previous project
+        handlePrev();
+      }
+    }
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+  };
+
+  // Dynamic Bullet Points for Featured Project
+  const getProjectHighlights = (p) => {
+    if (!p) return [];
+    if (p.slug === "modern-shoe") {
+      return [
+        "Dynamic footwear showcase with interactive sneaker previews & angle transitions.",
+        "Real-time cart state management with instant quantity and pricing calculations.",
+        "Modular architecture engineered with React.js, Tailwind CSS, and lightning-fast Vite tooling."
+      ];
+    }
+    if (p.slug === "asis-ai") {
+      return [
+        "Autonomous 2D floor plans to 3D spatial models conversion pipeline.",
+        "High-performance Three.js WebGL rendering with OpenCV geometric analysis.",
+        "Cryptographic integrity with SHA-256 blockchain verification hashes."
+      ];
+    }
+    if (p.slug === "pixelgo") {
+      return [
+        "Unified hospitality operating system orchestrating multi-property hotels & restaurants.",
+        "Real-time revenue telemetry, table occupancy, and live order tracking.",
+        "Fluid micro-animations built with React.js, Tailwind CSS, and Framer Motion."
+      ];
+    }
+    if (p.slug === "market-minds") {
+      return [
+        "FinTech growth intelligence platform with dark editorial brand aesthetics.",
+        "Interactive 5-stage discovery framework with live conversion funnels.",
+        "High-converting landing architecture powered by React, Next.js, and modern CSS."
+      ];
+    }
+    if (p.slug === "vasera-society") {
+      return [
+        "Smart housing society management platform for residential communities.",
+        "Amenity booking engine, maintenance billing records, and digital notice board.",
+        "Responsive design with REST API integration and modern UI components."
+      ];
+    }
+    if (p.slug === "neetu-lg") {
+      return [
+        "Modern electronics service center platform for LED TV repair & hardware diagnosis.",
+        "Instant online appointment scheduling, service catalog, and direct WhatsApp contact.",
+        "Lightweight, SEO-optimized layout with rapid mobile load times."
+      ];
+    }
+    return [
+      `Production-grade ${p.type} engineered with modern web standards.`,
+      p.description,
+      `Engineered using modern tech stack: ${p.stack.join(" • ")}.`
+    ];
+  };
+
+  const currentHighlights = getProjectHighlights(currentProject);
 
   return (
     <div className="page-view home-view">
@@ -62,35 +167,55 @@ export default function Home({ navigateTo }) {
       </div>
 
       {/* ====================================================================
-          SECTION 01: FEATURED WORK (Split Card with Highlights & Mockup)
+          SECTION 01: FEATURED WORK (3s Smooth Auto-Carousel with Left/Right Controls)
           ==================================================================== */}
       <section className="sd-section">
         <div className="sd-tag-bar">
           <div className="sd-tag-left">
-            <span>01 &mdash; FEATURED WORK</span>
+            <span>01 &mdash; FEATURED WORK [AUTOPLAY: 3s]</span>
           </div>
-          <span className="sd-tag-right">[ CASE STUDY 01 ]</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <span className="sd-tag-right">
+              [ CASE STUDY {String(currentIndex + 1).padStart(2, "0")} / {String(projectsData.length).padStart(2, "0")} ]
+            </span>
+          </div>
         </div>
 
-        <div className="sd-featured-card">
+        {/* 3-Second Animated Progress Bar */}
+        <div className="sd-carousel-progress-track">
+          <div
+            key={`progress-${currentIndex}-${isPaused}`}
+            className={`sd-carousel-progress-bar ${isPaused ? "paused" : ""}`}
+          />
+        </div>
+
+        {/* Interactive Carousel Card */}
+        <div
+          className="sd-featured-card sd-carousel-card"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Left Column: Project Highlights & Actions */}
           <div className="sd-featured-info">
-            <div>
-              <span className="sd-pill-badge">[ {featuredProject.type} ]</span>
-              <h3>{featuredProject.title}</h3>
+            <div key={`info-${animKey}`} className="sd-carousel-fade-in">
+              <span className="sd-pill-badge">[ {currentProject.type} ]</span>
+              <h3>{currentProject.title}</h3>
 
               <div className="sd-highlights-list">
                 <p className="hl-label">Key Highlights</p>
                 <ul>
-                  <li>Dynamic footwear showcase with interactive sneaker previews &amp; angle transitions.</li>
-                  <li>Real-time cart state management with instant quantity and pricing calculations.</li>
-                  <li>Modular architecture engineered with React.js, Tailwind CSS, and lightning-fast Vite tooling.</li>
+                  {currentHighlights.map((hl, i) => (
+                    <li key={i}>{hl}</li>
+                  ))}
                 </ul>
               </div>
             </div>
 
             <div className="sd-featured-actions">
               <a
-                href={featuredProject.demo}
+                href={currentProject.demo}
                 target="_blank"
                 rel="noreferrer"
                 className="sd-btn-black"
@@ -98,7 +223,7 @@ export default function Home({ navigateTo }) {
                 View Live Demo <ArrowUpRight size={15} />
               </a>
               <a
-                href={featuredProject.source}
+                href={currentProject.source}
                 target="_blank"
                 rel="noreferrer"
                 className="sd-btn-outline"
@@ -108,17 +233,21 @@ export default function Home({ navigateTo }) {
             </div>
           </div>
 
+          {/* Right Column: Interactive Browser Mockup with Left/Right Click Zones */}
           <div className="sd-featured-preview">
             <div className="sd-mockup-frame">
+              {/* Browser Header Bar */}
               <div className="sd-mockup-topbar">
                 <div style={{ display: "flex", gap: "6px" }}>
                   <div className="sd-mockup-dot" />
                   <div className="sd-mockup-dot" />
                   <div className="sd-mockup-dot" />
                 </div>
-                <span className="sd-mockup-url">modern-shoe-web-ui-react.vercel.app</span>
+                <span className="sd-mockup-url">
+                  {currentProject.demo.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                </span>
                 <a
-                  href={featuredProject.demo}
+                  href={currentProject.demo}
                   target="_blank"
                   rel="noreferrer"
                   style={{ color: "rgba(255,255,255,0.7)" }}
@@ -127,14 +256,45 @@ export default function Home({ navigateTo }) {
                   <ExternalLink size={12} />
                 </a>
               </div>
-              <div className="sd-mockup-img-wrap">
+
+              {/* Mockup Image Container with Left & Right Click/Touch Zones */}
+              <div className="sd-mockup-img-wrap sd-carousel-img-wrap">
                 <img
-                  src={featuredProject.image}
-                  alt={featuredProject.title}
-                  className="sd-mockup-img"
+                  key={`img-${animKey}`}
+                  src={currentProject.image}
+                  alt={currentProject.title}
+                  className="sd-mockup-img sd-carousel-img"
                   loading="lazy"
                 />
+
+                {/* Left Click Zone: Advances to Next Project */}
+                <button
+                  type="button"
+                  className="sd-carousel-nav-zone left"
+                  onClick={handleNext}
+                  title="Next Project (Touch/Click Left)"
+                  aria-label="Next Project"
+                >
+                  <span className="sd-zone-badge">
+                    <ChevronLeft size={16} /> NEXT
+                  </span>
+                </button>
+
+                {/* Right Click Zone: Goes back to Previous Project */}
+                <button
+                  type="button"
+                  className="sd-carousel-nav-zone right"
+                  onClick={handlePrev}
+                  title="Previous Project (Click Right)"
+                  aria-label="Previous Project"
+                >
+                  <span className="sd-zone-badge">
+                    PREV <ChevronRight size={16} />
+                  </span>
+                </button>
               </div>
+
+              {/* Bottom Specs Bar */}
               <div className="sd-mockup-screen-bar">
                 <div className="sd-screen-stats">
                   <div className="sd-screen-stat-box">
@@ -147,11 +307,63 @@ export default function Home({ navigateTo }) {
                   </div>
                   <div className="sd-screen-stat-box">
                     <span>Tech Stack</span>
-                    <strong>React + Vite</strong>
+                    <strong>{currentProject.stack.slice(0, 2).join(" + ")}</strong>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Carousel Bottom Controls Bar */}
+        <div className="sd-carousel-control-strip">
+          <div className="sd-carousel-btns">
+            {/* Left Button -> Next (as requested) */}
+            <button
+              type="button"
+              className="sd-carousel-step-btn"
+              onClick={handleNext}
+              title="Next Project"
+            >
+              <ChevronLeft size={14} /> Next Project
+            </button>
+
+            {/* Play/Pause Toggle */}
+            <button
+              type="button"
+              className={`sd-carousel-step-btn pause-btn ${isPaused ? "is-paused" : ""}`}
+              onClick={() => setIsPaused((prev) => !prev)}
+              title={isPaused ? "Resume Autoplay" : "Pause Autoplay"}
+            >
+              {isPaused ? <Play size={13} /> : <Pause size={13} />}
+              <span>{isPaused ? "Paused" : "3s Autoplay"}</span>
+            </button>
+
+            {/* Right Button -> Prev */}
+            <button
+              type="button"
+              className="sd-carousel-step-btn"
+              onClick={handlePrev}
+              title="Previous Project"
+            >
+              Previous <ChevronRight size={14} />
+            </button>
+          </div>
+
+          {/* Quick Slide Selector Dots */}
+          <div className="sd-carousel-dots">
+            {projectsData.map((p, idx) => (
+              <button
+                key={p.slug || idx}
+                type="button"
+                className={`sd-carousel-dot ${idx === currentIndex ? "active" : ""}`}
+                onClick={() => {
+                  setCurrentIndex(idx);
+                  setAnimKey((prev) => prev + 1);
+                }}
+                title={`Go to ${p.title}`}
+              />
+            ))}
           </div>
         </div>
       </section>

@@ -428,6 +428,219 @@ button {
 /* ==========================================================================
    SECTION 01: Featured Work (Split Card with Interactive Showcase)
    ========================================================================== */
+/* 3-Second Carousel Progress Track & Bar */
+.sd-carousel-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 9999px;
+  position: relative;
+}
+
+.sd-carousel-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--sd-accent);
+  animation: sdProgressFill 3s linear forwards;
+}
+
+.sd-carousel-progress-bar.paused {
+  animation-play-state: paused;
+}
+
+@keyframes sdProgressFill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Carousel Info Fade Animation */
+@keyframes sdFadeInSlide {
+  0% {
+    opacity: 0.15;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sd-carousel-fade-in {
+  animation: sdFadeInSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Carousel Image Fade Animation */
+@keyframes sdImgFade {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sd-carousel-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.sd-carousel-img {
+  animation: sdImgFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Interactive Touch / Click Zones on Preview (Left = Next, Right = Prev as requested) */
+.sd-carousel-nav-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 48%;
+  z-index: 5;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  transition: background 0.25s ease;
+  outline: none;
+}
+
+.sd-carousel-nav-zone.left {
+  left: 0;
+  justify-content: flex-start;
+}
+
+.sd-carousel-nav-zone.right {
+  right: 0;
+  justify-content: flex-end;
+}
+
+.sd-carousel-nav-zone:hover {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.sd-zone-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(17, 17, 17, 0.88);
+  color: #ffffff;
+  font-family: var(--sd-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sd-carousel-nav-zone:hover .sd-zone-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Carousel Bottom Control Strip */
+.sd-carousel-control-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 12px 18px;
+  background: #ffffff;
+  border: 1px solid var(--sd-border);
+  border-radius: 6px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sd-carousel-btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sd-carousel-step-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--sd-border);
+  background: var(--sd-card-bg);
+  color: var(--sd-text);
+  font-family: var(--sd-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sd-carousel-step-btn:hover {
+  background: #111111;
+  color: #ffffff;
+  border-color: #111111;
+}
+
+.sd-carousel-step-btn.pause-btn {
+  border-color: rgba(230, 59, 46, 0.35);
+  color: var(--sd-accent);
+}
+
+.sd-carousel-step-btn.pause-btn:hover {
+  background: var(--sd-accent);
+  color: #ffffff;
+  border-color: var(--sd-accent);
+}
+
+.sd-carousel-step-btn.pause-btn.is-paused {
+  background: var(--sd-accent);
+  color: #ffffff;
+  border-color: var(--sd-accent);
+}
+
+.sd-carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-width: 55%;
+  justify-content: flex-end;
+}
+
+.sd-carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.22s ease;
+}
+
+.sd-carousel-dot:hover {
+  background: var(--sd-text);
+  transform: scale(1.3);
+}
+
+.sd-carousel-dot.active {
+  width: 22px;
+  border-radius: 9999px;
+  background: var(--sd-accent);
+}
+
 .sd-featured-card {
   border: 1px solid var(--sd-border);
   background: var(--sd-card-bg);
